@@ -1,0 +1,84 @@
+---
+import { CircleX, MoveRight } from 'lucide-react'
+---
+
+<div
+	class="fixed z-[1000] hidden h-full w-full items-center justify-center bg-gray-300/50"
+	id="country-alert-dialog"
+>
+	<div
+		class="relative mx-auto w-full max-w-screen-md space-y-6 rounded-lg bg-white px-12 py-8 shadow-lg"
+	>
+		<button class="close-country-alert absolute right-5 top-5">
+			<CircleX />
+		</button>
+		<div class="space-y-4">
+			<div class="text-2xl leading-tight text-black md:text-4xl">
+				We noticed you are browsing from outside India
+			</div>
+			<div class="md:text-lg">
+				The information presented on this website is intended for healthcare professionals,
+				patients, and caregivers located in India. To view information intended for users located
+				outside of India, please visit our international website, <span class="text-primary-500">
+					<a href="https://canaryoncoglobal.gwaddons.com">canaryoncoglobal.gwaddons.com</a>
+				</span>. For partner information, please continue using this website.
+			</div>
+		</div>
+		<div class="border"></div>
+		<div class="flex flex-col items-center justify-between gap-y-5 md:flex-row">
+			<!-- <a href="/" class="hover:underline"
+				>Continue using this website <MoveRight className="ml-1.5 inline-block" />
+			</a> -->
+
+			<button class="close-country-alert text-gray-800 hover:underline"
+				>Continue using this website <MoveRight strokeWidth="1" className="ml-1.5 inline-block" />
+			</button>
+
+			<a href="/en" class="block rounded-sm bg-primary-300 px-5 py-2.5 text-gray-700 shadow-sm"
+				>Visit International Website</a
+			>
+		</div>
+	</div>
+</div>
+
+<script>
+	document.addEventListener('astro:page-load', async () => {
+		var visited = localStorage.getItem('visited_canaryonco')
+		if (visited) return
+
+		try {
+			// const res = await fetch('http://ip-api.com/json?fields=country')
+			// const data = (await res.json()) as { country: string }
+
+			// const data = { country: 'India' }
+			const data = { country: 'US' }
+
+			console.log({ data })
+
+			if (data.country === 'India') {
+				console.info('An Indian client')
+				return
+			} else {
+				console.info('Client not from INDIA')
+			}
+
+			const dialog = document.getElementById('country-alert-dialog')
+
+			dialog?.classList.remove('hidden')
+			dialog?.classList.add('flex')
+
+			document.querySelectorAll('.close-country-alert').forEach((ele) => {
+				ele?.addEventListener('click', () => {
+					console.log('Clicked')
+
+					dialog?.classList.add('hidden')
+					dialog?.classList.remove('flex')
+
+					localStorage.setItem('visited_canaryonco', String(true))
+				})
+			})
+		} catch (error) {
+			console.error('Error while getting country', error)
+		}
+	})
+</script>

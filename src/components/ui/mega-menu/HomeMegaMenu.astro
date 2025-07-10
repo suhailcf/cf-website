@@ -1,0 +1,122 @@
+---
+// src/components/Menu.astro
+import { undefined } from 'astro:schema'
+import { menu } from './Home'
+
+// Props
+type Props = {
+	menuId?: string
+}
+// Page Metadata
+const { menuId } = Astro.props
+
+// const menuItems =
+// 	menu.find((menuItem) => menuItem.id == menuId)?.megaMenuItems || menu[0].megaMenuItems
+
+// Get the first menu item's mega menu items (since that's what we're displaying)
+const menuItems = menu[0].megaMenuItems
+---
+
+<div class="flex">
+	<div class="border-r-2 text-left">
+		{
+			menuItems.map((item, index) => (
+				<div
+					class="menu-item group flex min-w-52 justify-between rounded-l-md px-2 py-2 text-lg transition-colors duration-200"
+					data-content={item.content}
+				>
+					<button>{item.title}</button>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="lucide lucide-chevron-right"
+					>
+						<path d="m9 18 6-6-6-6" />
+					</svg>
+				</div>
+			))
+		}
+	</div>
+
+	<div id="content-display" class="p-4"></div>
+</div>
+
+<script>
+	const menuItems = document.querySelectorAll('.menu-item')
+	const contentDisplay = document.getElementById('content-display')
+	let activeItem: Element | null = null
+
+	menuItems.forEach((item) => {
+		item.addEventListener('mouseenter', () => {
+			// Remove active state from previous item
+			if (activeItem) {
+				activeItem.classList.remove('active', 'bg-gray-200')
+			}
+
+			// Set active state on current item
+			item.classList.add('active', 'bg-gray-200')
+			activeItem = item
+
+			// Update content
+			const content = item.getAttribute('data-content')
+
+			if (content && contentDisplay) {
+				contentDisplay.style.opacity = '0'
+				setTimeout(() => {
+					contentDisplay.innerHTML = content
+					contentDisplay.style.opacity = '1'
+				}, 150)
+			}
+		})
+	})
+
+	// Set initial active state
+	if (menuItems.length > 0) {
+		const firstItem = menuItems[0]
+		firstItem.classList.add('active', 'bg-gray-200')
+		activeItem = firstItem
+		const content = firstItem.getAttribute('data-content')
+		if (content && contentDisplay) {
+			contentDisplay.innerHTML = content
+		}
+	}
+
+	// Handle mouse leaving the menu area
+	const menuArea = document.querySelector('.border-r-2')
+	if (menuArea) {
+		menuArea.addEventListener('mouseleave', () => {
+			// Keep the active item highlighted
+			if (activeItem) {
+				menuItems.forEach((item) => {
+					if (item !== activeItem) {
+						item.classList.remove('active', 'bg-gray-200')
+					}
+				})
+			}
+		})
+	}
+</script>
+
+<style>
+	#content-display {
+		transition: opacity 0.2s ease-in-out;
+		min-width: 300px;
+	}
+
+	.menu-item {
+		cursor: pointer;
+		transition: background-color 0.2s ease-in-out;
+	}
+
+	.menu-item:hover,
+	.menu-item.active {
+		background-color: rgb(229 231 235); /* Tailwind's bg-gray-200 */
+	}
+</style>

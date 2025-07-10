@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+// - SEO
+const SEO = {
+	title: 'About us | Canary Oncoceutics',
+	description: ''
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<div class="mx-auto w-full max-w-screen-lg px-10 py-10">
+		<div class="mb-8 flex w-full justify-center">
+			<div class="w-fit text-center">
+				<h2 class="border-b-2 border-primary-400 pb-2">Certifications</h2>
+			</div>
+		</div>
+		<div class="">
+			<div class="">
+				<div class="">
+					<span class=""> </span>
+				</div>
+			</div>
+		</div>
+		<div class="">
+			<div class="grid-cols-2 gap-x-8 sm:grid">
+				<p>
+					Canary Oncoceutics is a leading cancer diagnostics company founded by scientists from
+					world-leading academic institutions. Our guiding principles are focused on quality,
+					patient care, and patient safety. Driven by these principles, we have dedicated ourselves
+					to developing and delivering advanced genomic tests that are setting new standards in
+					precision medicine. These tests provide clinicians worldwide with unparalleled insights
+					into the unique genetic profiles driving each patient’s cancer.
+				</p><p>
+					By harnessing the power of genomic science, we empower healthcare providers to tailor
+					treatment strategies precisely to the molecular characteristics of the disease, thereby
+					optimizing therapeutic outcomes and minimizing the impact of treatment-related side
+					effects.
+				</p><p>
+					Our dedication to innovation extends beyond technology; it encompasses a collaborative
+					approach with leading oncologists, researchers, and healthcare institutions globally.
+					Through these partnerships, we continuously push the boundaries of cancer genomics,
+					advancing the field and driving forward the promise of personalized medicine.
+				</p><p>
+					Canary stands as a beacon of innovation and dedication in the fight against cancer.
+					Through cutting-edge genomic diagnostics, personalized treatment solutions, and an
+					unwavering commitment to patient-centric care, we strive to make a meaningful difference
+					in the lives of those affected by cancer, offering hope and paving the way toward a
+					brighter future.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="my-20"></div> -->
+	<div class="my-20" id="mission-vision">
+		<div class="mx-auto my-10 max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-4xl">
+			<div class="md:flex">
+				<div class="md:shrink-0">
+					<img
+						class="h-64 w-full object-cover md:h-full md:w-96"
+						src="/images/clia.png"
+					/>
+				</div>
+				<div class="p-8">
+					<div class="text-2xl font-bold text-primary-700">CLIA Certified</div>
+					<!-- <a href="#" class="mt-1 block text-lg font-medium leading-tight text-black hover:underline"
+					>Incredible accommodation for your team
+				</a> -->
+					<p class="mt-2 text-slate-500">
+						To improve cancer care by using advanced genomic tests that provide doctors with the
+						information they need to tailor treatments and help patients get better.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="mx-auto max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-4xl">
+			<div class="md:flex">
+				<div class="p-8">
+					<div class="text-2xl font-bold text-primary-700">CAP Accredited</div>
+					<!-- <a href="#" class="mt-1 block text-lg font-medium leading-tight text-black hover:underline"
+					>Incredible accommodation for your team
+				</a> -->
+					<p class="mt-2 text-slate-500">
+						To transform cancer treatment with new and innovative genomic solutions, setting new
+						standards in precision medicine and offering hope for a brighter future.
+					</p>
+				</div>
+				<div class="md:shrink-0">
+					<img
+						class="h-64 w-full object-cover md:h-full md:w-96"
+						src="/images/cap.png"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

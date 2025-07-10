@@ -1,0 +1,62 @@
+---
+// Feature Cards grid Section
+// ------------
+// Description: A grid of cards with feature information in a 4 column layout.
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+// - UI
+import Card from '../../ui/cards/FeatureCard.astro'
+
+// Content
+// - Cards
+import acuityImage from '../../../../public/images/acuity-new.jpg'
+import pulseImage from '../../../../public/images/pulse-new.jpg'
+import focusImage from '../../../../public/images/focus-new.jpg'
+// - UI
+import Feature from '../../ui/Feature.astro'
+
+// Data
+import features from '../../../data/json-files/featuresData.json'
+---
+
+<Section id="features">
+	<Row classes="m-12">
+		<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+			<h2 class="text-pretty">
+				Our <strong>precision</strong> oncology ecosystem
+			</h2>
+			<p class="pb-0 text-lg">
+				Empowering <strong>you</strong> with the knowledge for <strong
+					>personalized cancer treatment</strong
+				>.
+			</p>
+		</Col>
+	</Row>
+	<Row classes="">
+		<!-- <Col span="3">
+			
+		</Col> -->
+		<Col span="4" classes="flex flex-col gap-4">
+			<Card
+				title="Advancing Care Today"
+				subtitle="<ul class='basic-text'><li><strong>Patient Support Resources:</strong> Providing financial guidance, informed treatment decision support, and valuable educational materials.</li><li><strong>Genomic Testing for Actionable Insights:</strong> Offering a comprehensive suite of genomic profiling tests to unlock insights for a wide spectrum of cancer types.</li><li><strong>Personalized Treatment Strategies:</strong> Matching patients to targeted therapies, immunotherapies, and appropriate clinical trial options based on their unique genomic profiles.</li></ul>"
+			/>
+		</Col>
+		<Col span="4">
+			<Card
+				title="Transforming Care Tomorrow"
+				subtitle="<ul class='basic-text'><li><strong>Streamlined Clinical Trial Solutions:</strong> Accelerating biopharma research with faster, more efficient clinical trial design, patient support, and screening processes.</li><li><strong>Data-Driven Biomarker Discovery:</strong> Leveraging cutting-edge data analysis tools to uncover novel insights that accelerate biomarker research and drug development.</li><li><strong>Accelerated Drug Discovery & Launch:</strong> Partnering with the biopharma industry to facilitate the discovery, development, and distribution of the next generation of breakthrough cancer treatments.</li></ul>"
+			/>
+		</Col>
+		<Col span="4">
+			<Card
+				title="Innovating Care Together"
+				subtitle="<ul class='basic-text'><li><strong>Strategic Partnerships:</strong> Collaborating with leading patient advocacy organizations, world-renowned medical centers, and pioneering researchers to revolutionize cancer care.</li><li><strong>Molecular Data Research Initiatives:</strong> Empowering researchers to generate new connections and insights that improve patient care.</li></ul>"
+			/>
+		</Col>
+	</Row>
+</Section>

@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro'
+// import FaqSticky from '../components/blocks/FAQ/FaqSticky.astro'
+// import CTA from '../components/blocks/CTA/BasicLight.astro'
+
+// - SEO
+const SEO = {
+	title: 'Advisory Board | Canary Oncoceutics',
+	description: ''
+}
+
+// // Data
+// import faqData from '../data/json-files/faqData.json'
+// // - FAQ Categories
+// const faqIntegrations = faqData.filter((faq) => faq.category === 'integrations')
+
+const boardMembers = [
+	{
+		name: 'Olivier Elemento',
+		qualification: 'Ph.D.',
+		description:
+			'He is the Director of the Englander Institute for Precision Medicine, Professor in the Department of Physiology and Biophysics, Associate Director of the Institute for Computational Biomedicine, and Associate Program Director of the Clinical & Translational Science Center at Weill Cornell Medicine. Dr. Elemento is a world-renowned computational biologist who led the development the first New York State-approved whole exome sequencing test for oncology and also developed new methods for assessing tumor-driving pathways, the immune landscape of tumors and predicting immunotherapy responders. Moreover, Dr. Elemento developed methodologies to repurpose existing drugs to target specific pathways, predict drug toxicity and identify synergistic drug combinations combining Big Data with experimentation and genomic profiling to accelerate the discovery of cancer cures. Dr. Elemento has published over 150 scientific papers in the area of genomics, epigenomics, computational biology and drug discovery.',
+		pic: '/images/board/Olivier-Elemento-Ph.D.jpg'
+	},
+	{
+		name: 'Andrew Dannenberg',
+		qualification: 'M.D.',
+		description:
+			'He was previously the Henry R. Erle, MD-Roberts Family Professor of Medicine at Weil Cornell Medical College and was also the founding Director of the Weill Cornell Cancer Center. He has authored 200+ scientific articles and edited several books and journals. Dr. Dannenberg has broad research interests ranging in scope from inflammation to the obesity cancer connection. Dr. Dannenberg received his medical degree from Washington University in St. Louis and served as a medical resident and fellow at New York Hospital Cornell Medical Center. He is a member of the Association of American Physicians and the American Society for Clinical Investigation. In 2011, he was awarded the American Association for Cancer Research/Prevent Cancer Foundation award for excellence in cancer prevention research. He has been a partner in Emerald Bioventures since 2021.',
+		pic: '/images/board/Andrew-Dannenberg,-M.D.jpg'
+	},
+	{
+		name: 'Stefan Gruenwald',
+		qualification: 'M.D., Ph.D.',
+		description:
+			'He is the President of Diagnomics, Inc., one of the first Next Generation Sequencing (NGS)-based genomics companies located in California providing sophisticated solutions for personalized medicine and next generation healthcare. Diagnomics offers high quality innovative R&D and CLIA services to global pharmaceutical, biotech, and medical device companies as well as academic institutions. Founder of Corporate Governance Partners, co-founder, seed investor and President of Diagnomics, Managing Member at Genautica. Formerly the Chief Technology Officer at PharMingen (91-97) and the VP of R&D at Becton Dickinson (97-00). Founder of Orbigen (00-04). Involved in several mergers and acquisitions in the $200+ MM range.',
+		pic: '/images/board/Stefan-Gruenwald-M.D.-Ph.D.jpg'
+	},
+	{
+		name: 'Jay Amberson',
+		qualification: 'M.D',
+		description:
+			'He is the former Former Vice President, Divisional Medical Director and Discipline Director for Anatomic Pathology at Laboratory Corporation of America (LabCorp) and was the former Chief Medical Officer and Laboratory Director, Dianon Systems, Inc. Dr. Amberson is board certified in Anatomic Pathology and Cytopathology and has extensive experience in evaluating technologies for their commercial potential in clinical diagnostics.',
+		pic: '/images/board/Jay-Amberson-M.D.jpg'
+	},
+	{
+		name: 'Ellen Porges',
+		qualification: 'J.D.',
+		description:
+			'She is a former Partner and Deputy General Counsel of Goldman Sachs, where she worked from 1990-2020. Prior to that, was at Sullivan & Cromwell. Helps advise certain biotech companies through legal matters. JD, Yale Law School, Managing Editor of the Yale Law Journal; Clerkship on Second Circuit Court of Appeals',
+		pic: '/images/board/Ellen-Porges-J.D.jpg'
+	},
+	{
+		name: 'Dina Moskowitz',
+		qualification: ``,
+		description: `She is CEO and founder of PartnerOptimizer, Inc. and has been leading and/or consulting to B2B tech companies and partnership teams throughout her career. This year she is a recipient of Women in Cloud's "Top 100 Women B2B Tech Founders". Dina is recognized as one of the ‘Top Women in the Channel’, a Cloud Girls Trailblazer, a top 20 Channel Influencer. Prior to PartnerOptimizer, Moskowitz was CEO and founder of Critical Digital Data Solutions Inc., which developed cloud-based data storage solutions.`,
+		pic: '/images/board/Dina-Moskowitz.jpg'
+	}
+]
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<div class="mb-16">
+		<dh-component>
+			<div class="container mx-auto flex justify-center pt-16">
+				<div class="w-fit text-center">
+					<h2 class="border-b-2 border-primary-400 pb-2">Advisory Board</h2>
+
+					<p class="text-center font-light text-gray-500 sm:text-xl lg:mb-16">
+						The Talented People Behind the Scenes of the Organization
+					</p>
+				</div>
+			</div>
+			<div class="mt-10 w-full px-10 pt-16">
+				<div class="container mx-auto">
+					<!-- <div
+						role="list"
+						aria-label="Behind the scenes People "
+						class="flex-wrap items-stretch gap-x-10 sm:flex sm:justify-around md:flex md:justify-around lg:flex lg:justify-around xl:justify-start"
+					> -->
+					<div
+						role="list"
+						aria-label="Behind the scenes People "
+						class="grid justify-items-center lg:grid-cols-2 xl:grid-cols-3"
+					>
+						{
+							boardMembers.map((member) => (
+								<div
+									role="listitem"
+									class="relative mb-32 mt-16 sm:mb-24 sm:w-3/4 md:w-4/5 lg:w-11/12 xl:w-11/12"
+								>
+									<div class="h-full overflow-hidden rounded bg-white shadow-md">
+										<div class="absolute -mt-20 flex w-full justify-center">
+											<div class="h-32 w-32">
+												<img
+													src={member.pic}
+													alt={member.name}
+													role="img"
+													class="h-full w-full rounded-full object-cover shadow-md"
+												/>
+											</div>
+										</div>
+										<div class="mt-16 px-6">
+											<h1 class="mb-1 text-center text-3xl font-bold">{member.name}</h1>
+											<p class="text-center text-xl text-gray-800">{member.qualification}</p>
+											<p class="pb-10 pt-3 text-justify text-base font-normal text-gray-600">
+												{member.description}
+											</p>
+										</div>
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</dh-component>
+	</div>
+</Layout>

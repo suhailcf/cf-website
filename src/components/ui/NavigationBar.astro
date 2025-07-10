@@ -1,0 +1,293 @@
+---
+import Button from './Button.astro'
+import { navigationBarData } from '../../config/navigationBar'
+import MegaMenu from './mega-menu/MegaMenu.astro'
+import { ChevronDown, Search } from 'lucide-react'
+import SearchField from './SearchField.astro'
+
+type Props = {
+	isInternational?: boolean
+}
+
+const { isInternational } = Astro.props
+
+const { logo, navItems, navActionsPrimary, navActionsSecondary } = navigationBarData
+
+// Type assertion for navActions
+const savedNavActionsPrimary = navActionsPrimary.map((action) => ({
+	...action,
+	size: action.size as 'base' | 'lg' | 'sm',
+	style: action.style as 'primary' | 'secondary' | 'neutral'
+}))
+
+const savedNavActionsSecondary = navActionsSecondary.map((action) => ({
+	...action,
+	size: action.size as 'base' | 'lg' | 'sm',
+	style: action.style as 'primary' | 'secondary' | 'neutral'
+}))
+---
+
+<header class="header !z-50 !bg-gray-50">
+	<div class="header__container">
+		<nav aria-label="main navigation" role="navigation" class="relative">
+			<!-- Logo and Primary Actions -->
+			<div class="header__nav gap-5">
+				<div class="flex items-center gap-2">
+					<a href="/" class="header__logo">
+						<img src={logo.src} alt={logo.alt} class="w-48 object-cover" />
+					</a>
+				</div>
+
+				
+
+				<!-- <div class="header__actions">
+					{
+						savedNavActionsPrimary.map((action) => (
+							<Button
+								classes="flex-auto"
+								size={action.size}
+								style={action.style}
+								variation="outline"
+								elevated
+								modal="signup"
+								link={action.link}
+							>
+								{action.name}
+							</Button>
+						))
+					}
+				</div> -->
+
+				
+
+			<!-- <div class="relative hidden lg:hidden" id="search-field-container">
+				<SearchField />
+			</div> -->
+
+			<!-- Main Navigation -->
+			<div class="header__nav header__nav--mega-menu">
+				<!-- Navigation Links -->
+				<ul role="menubar" aria-label="Select page" class="header__menu">
+					{
+						navItems.map((item) => (
+							<li role="none" class="header__menu-item" data-menu-trigger={item.name}>
+								<button role="menuitem" class="header__menu-link overflow-auto whitespace-nowrap">
+									{item.name}
+									<ChevronDown size={18} className="inline-block hover:text-primary-600" />
+								</button>
+							</li>
+						))
+					}
+				</ul>
+
+				<!-- Secondary Actions -->
+				<div class="header__actions">
+					<div class="flex w-full gap-2 lg:hidden">
+						{
+							savedNavActionsPrimary.map((action) => (
+								<Button
+									classes="flex-auto"
+									size={action.size}
+									style={action.style}
+									variation="outline"
+									modal="signup"
+									elevated
+								>
+									{action.name}
+								</Button>
+							))
+						}
+					</div>
+					{
+						savedNavActionsSecondary.map((action) => (
+							<Button
+								classes="flex-auto w-full m-2"
+								size={action.size}
+								style={action.style}
+								variation="outline"
+								elevated
+								modal="signup"
+							>
+								{action.name}
+							</Button>
+						))
+					}
+				</div>
+			</div>
+		</nav>
+
+		{
+			isInternational && (
+				<div class="absolute left-0 right-0 flex justify-center">
+					<div class="w-fit rounded-b-2xl bg-primary-300 px-6 py-1 text-xl font-semibold text-black">
+						For International Users
+					</div>
+				</div>
+			)
+		}
+
+		<!-- Mega Menu Container -->
+		{
+			navItems.map((item) => (
+				<div class="megamenu-container hidden" data-menu-content={item.name}>
+					<div class="megamenu-header">
+						<h2 class="text-2xl font-semibold">{item.name}</h2>
+					</div>
+					<MegaMenu menuItems={item.megaMenuItems} menuName={item.name} />
+				</div>
+			))
+		}
+	</div>
+</header>
+
+<script async defer>
+	document.addEventListener('astro:page-load', () => {
+		// Mobile menu toggle
+		// const headerToggle = document.getElementById('header-toggle')
+		// const headerMenu = document.querySelector('.header__menu')
+
+		// headerToggle?.addEventListener('click', () => {
+		// 	headerToggle.classList.toggle('header__toggle--open')
+		// 	headerMenu?.classList.toggle('header__menu--open')
+		// })
+
+		// Mega menu handling
+		const menuTriggers = document.querySelectorAll('[data-menu-trigger]')
+		const menuContents = document.querySelectorAll('[data-menu-content]')
+		let activeMenu
+
+		function closeAllMegaMenus() {
+			menuContents.forEach((menu) => {
+				menu.classList.add('hidden')
+			})
+			menuTriggers.forEach((trigger) => {
+				trigger.classList.remove('active')
+			})
+			activeMenu = null
+		}
+
+		menuTriggers.forEach((trigger) => {
+			trigger.addEventListener('click', (e) => {
+				e.preventDefault()
+				const menuName = trigger.getAttribute('data-menu-trigger')
+				const menuContent = document.querySelector(`[data-menu-content="${menuName}"]`)
+
+				if (menuContent === activeMenu) {
+					closeAllMegaMenus()
+				} else {
+					closeAllMegaMenus()
+					if (menuContent) {
+						menuContent.classList.remove('hidden')
+						trigger.classList.add('active')
+						activeMenu = menuContent
+					}
+				}
+			})
+		})
+
+		// Close mega menu when clicking outside
+		document.addEventListener('click', (e) => {
+			const target = e.target
+			if (!target.closest('[data-menu-trigger]') && !target.closest('[data-menu-content]')) {
+				closeAllMegaMenus()
+			}
+		})
+
+		// search toggle for small screens
+
+		const searchButton = document.querySelector('.search__toggle')
+		const searchFieldContainer = document.getElementById('search-field-container')
+		if (searchButton) {
+			searchButton.addEventListener('click', () => {
+				searchFieldContainer.classList.toggle('hidden')
+			})
+		}
+	})
+</script>
+
+<style>
+	.header {
+		@apply sticky top-0 z-20 w-full bg-white shadow-sm dark:bg-neutral-900;
+	}
+
+	.header__container {
+		@apply relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem];
+	}
+
+	.header__nav {
+		@apply flex items-center justify-between py-2;
+	}
+
+	.header__nav--mega-menu {
+		@apply block lg:flex;
+	}
+
+	.header__menu {
+		@apply mx-auto hidden h-full cursor-pointer lg:!flex lg:space-x-8;
+		/* @apply invisible absolute left-0 top-0 z-[-1] ml-auto h-dvh w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-white/90 px-8 py-[6rem] font-medium opacity-0 transition-[opacity,visibility] duration-300 lg:visible lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:space-x-8 lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100 dark:bg-neutral-900/90 dark:lg:bg-transparent; */
+		/* @apply invisible absolute mx-auto h-dvh cursor-pointer lg:visible lg:relative lg:flex lg:h-full lg:space-x-8; */
+	}
+
+	.header__menu--open {
+		@apply block bg-white/90 opacity-100 backdrop-blur-sm;
+	}
+
+	.header__menu-item {
+		@apply py-1.5 text-left hover:bg-primary-50 sm:text-center hover:lg:bg-transparent;
+	}
+
+	.header__menu-link {
+		@apply text-gray-600 hover:font-semibold hover:text-primary-600 dark:text-gray-300 dark:hover:text-white;
+	}
+
+	.header__menu-link.active {
+		@apply text-primary-600 dark:text-primary-400;
+	}
+
+	.megamenu-container {
+		@apply absolute left-0 top-full mx-auto w-full max-w-full bg-white p-6 px-6 shadow-lg dark:bg-neutral-900 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem];
+		animation: dropDown 0.2s ease-out forwards;
+	}
+
+	.megamenu-header {
+		@apply mb-6;
+	}
+
+	@keyframes dropDown {
+		0% {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.header__toggle {
+		@apply relative order-10 block h-10 w-10 self-center lg:hidden [&--open]:visible [&--open]:opacity-100;
+	}
+	.header__toggle-inner {
+		@apply absolute left-1/2 top-1/2 w-6 -translate-x-1/2 -translate-y-1/2 transform;
+	}
+	.header__toggle-inner span {
+		@apply absolute block h-0.5 transform rounded-full bg-neutral-900 transition-all duration-300 dark:bg-white;
+	}
+	.header__toggle-inner span:nth-child(1) {
+		@apply w-9/12 -translate-y-2 [.header\_\_toggle--open_&]:w-6 [.header\_\_toggle--open_&]:translate-y-0 [.header\_\_toggle--open_&]:rotate-45;
+	}
+	.header__toggle-inner span:nth-child(2) {
+		@apply w-6 [.header\_\_toggle--open_&]:-rotate-45;
+	}
+	.header__toggle-inner span:nth-child(3) {
+		@apply w-1/2 origin-top-left translate-y-2 [.header\_\_toggle--open_&]:w-0;
+	}
+	.header__actions {
+		/* @apply fixed bottom-0 left-0 hidden w-full items-center justify-between gap-4 border-t border-neutral-100 bg-white px-6 py-4 dark:border-neutral-800 dark:bg-neutral-950 lg:relative lg:ml-auto lg:flex lg:w-auto lg:border-none lg:bg-transparent lg:px-0 lg:py-0 lg:dark:bg-transparent [.header\_\_menu--open~&]:flex; */
+		@apply hidden w-full items-center justify-between gap-4 border-t border-neutral-100 bg-white pb-2 pt-4 dark:border-neutral-800 dark:bg-neutral-950 lg:relative lg:ml-auto lg:flex lg:w-auto lg:border-none lg:bg-transparent lg:px-0 lg:py-0 lg:dark:bg-transparent [.header\_\_menu--open~&]:flex [.header\_\_menu--open~&]:flex-col;
+	}
+
+	.searchbar--open {
+		/* @apply fixed top-full z-50 block w-full bg-red-300; */
+	}
+</style>

@@ -1,0 +1,106 @@
+---
+// Highlights Section
+// ------------
+// Description: A section with a multiple text and image rows.
+
+// Components
+// - UI
+import TextImage from '../basic/TextImage.astro'
+
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+
+// Content
+import highlight01 from '../../../assets/highlights/highlight-01.svg'
+import highlight01mobile from '../../../assets/highlights/highlight-01-mobile.svg'
+import highlight02 from '../../../assets/highlights/highlight-02.svg'
+import highlight02mobile from '../../../assets/highlights/highlight-02-mobile.svg'
+import highlight03 from '../../../assets/highlights/highlight-03.svg'
+import highlight03mobile from '../../../assets/highlights/highlight-03-mobile.svg'
+import highlight04 from '../../../assets/highlights/highlight-04.svg'
+import highlight04mobile from '../../../assets/highlights/highlight-04-mobile.svg'
+
+import forPatient from '../../../../public/images/for-patient.jpg'
+import forProvider from '../../../../public/images/for-provider.jpg'
+import forBiopharma from '../../../../public/images/for-biopharma.jpg'
+
+type HighlightBlock = {
+	title: string
+	subtitle: string
+	text: string
+	image: any
+	mobileImage?: any
+	imageWidth: number
+	imageHeight: number
+	imagePosition: 'left' | 'right'
+}
+const highlightBlocks: HighlightBlock[] = [
+	{
+		title: 'For <strong>Patients</strong>',
+		subtitle: "Unlock Your Cancer's Secrets: Genetic Testing for Personalized Treatment",
+		text: "A cancer diagnosis is filled with questions. Gain <strong>clarity</strong> and <strong>confidence</strong> in your treatment plan with Canary Onco's genetic testing.<br/> We provide specific genomic insights, revealing the unique molecular makeup of your cancer, so you and your doctor can make informed, personalized choices for your care.<br/> It starts with <strong>understanding</strong>.<br/> We're here to help you navigate the complexities of cancer treatment and unlock the best path forward.",
+		image: forPatient,
+		imageWidth: 448,
+		imageHeight: 520,
+		mobileImage: forPatient,
+		imagePosition: 'right'
+	},
+	{
+		title: 'For <strong>Providers</strong>',
+		subtitle: 'Navigate Cancer Complexity with Confidence: Genetic Testing from Canary Onco',
+		text: 'Gain the clarity you need to guide treatment strategies for your advanced cancer patients. Genetic testing helps you determine comprehensive cancer treatment options based on unique cancer features for each patient you treat – and increases their odds for a healthy future. With Canary Onco, unlock the power of precision medicine to guide individualized treatment decisions with confidence.',
+		image: forProvider,
+		imageWidth: 448,
+		imageHeight: 520,
+		mobileImage: forProvider,
+		imagePosition: 'left'
+	},
+	{
+		title: 'For <strong>Biopharma & Research</strong> Partners',
+		subtitle:
+			'Precision Partnering for Breakthrough Therapies: Accelerate Your Oncology Programs with Canary Onco',
+		text: 'From initial discovery to launch, Canary Onco provides the global portfolio of tests and services, combined with the expertise of our scientific and regulatory experts, to fit your specific needs. We are your ideal partner to help make your next breakthrough a standard of care. ',
+		image: forBiopharma,
+		imageWidth: 448,
+		imageHeight: 520,
+		mobileImage: forBiopharma,
+		imagePosition: 'right'
+	}
+]
+---
+
+<Section id="highlightRows">
+	<Row classes="">
+		<Col span="12" align="center" classes="max-w-4xl mx-auto">
+			<h2 class="text-pretty">
+				Why choose <strong>us</strong>
+			</h2>
+			<p class="pb-0 text-lg">
+				Working Together for a Future Without Cancer: Canary Onco provides comprehensive solutions
+				for every stakeholder in the fight against cancer. Select the section that best describes
+				you<br />
+				<strong>For Patients</strong>: Learn about precision treatment and understand genetic
+				testing.<br /><strong>For Providers</strong>: Collaborate with top oncologists and better
+				serve your patients.<br /><strong>For Biopharma & Research Partners</strong>: Partner on CDx
+				with advanced science.
+			</p>
+		</Col>
+	</Row>
+	{
+		highlightBlocks.map((highlight, key) => (
+			<TextImage
+				id={`highlight-${key}`}
+				title={highlight.title}
+				subtitle={highlight.subtitle}
+				text={highlight.text}
+				image={highlight.image}
+				imageWidth={highlight.imageWidth}
+				imageHeight={highlight.imageHeight}
+				mobileImage={highlight.mobileImage}
+				imagePosition={highlight.imagePosition}
+				classes={key === 0 ? '!pb-0' : key === highlightBlocks.length - 1 ? '!pt-0' : '!py-0'}
+			/>
+		))
+	}
+</Section>

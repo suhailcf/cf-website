@@ -1,0 +1,135 @@
+---
+import type { MegaMenuContent } from '../../../config/navigationBar'
+import Content from './Content.astro'
+
+interface Props {
+	menuItems: Array<{
+		title: string
+		content: MegaMenuContent
+		link: string
+	}>
+	menuName: string
+}
+
+const { menuItems, menuName } = Astro.props
+
+// Dynamic import of components
+// const components = await Promise.all(
+// 	menuItems.map(async (item) => {
+// 		const component = await import(item.content.componentPath)
+// 		return component.default
+// 	})
+// )
+
+// const components = menuItems.map((item) => {
+// 	const component = item.content.componentPath
+// 	return component
+// })
+---
+
+<div class="z-[9999] flex">
+	<!-- Sidebar Navigation -->
+	<div class="w-full border-r sm:w-64">
+		{
+			menuItems.map((item, index) => (
+				<a
+					class="menu-item group flex w-full items-center justify-between rounded-l-md px-4 py-3 text-left text-lg transition-colors hover:bg-gray-100 dark:hover:bg-neutral-800"
+					data-index={index}
+					data-menu-name={menuName}
+					href={item?.link || '#'}
+				>
+					<span>{item.title}</span>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						class="text-gray-400 transition-transform group-hover:text-primary-500"
+					>
+						<path
+							fill="none"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="m9 18 6-6-6-6"
+						/>
+					</svg>
+				</a>
+			))
+		}
+	</div>
+
+	<!-- Content Area -->
+	<div class="content-area hidden flex-1 p-6 sm:block" id={`menu-content-${menuName}`}>
+		{
+			menuItems.map((item, index) => {
+				// const Component = components[index]
+				return (
+					<div class="menu-content hidden" data-content-index={index} data-menu-name={menuName}>
+						{/* <Component {...(item.content.props || {})} /> */}
+						<Content content={item.content} link={item.link} />
+					</div>
+				)
+			})
+		}
+	</div>
+</div>
+
+<script define:vars={{ menuName, menuItems }}>
+	document.addEventListener('astro:page-load', () => {
+		const buttons = document.querySelectorAll(`.menu-item[data-menu-name="${menuName}"]`)
+		const contents = document.querySelectorAll(`.menu-content[data-menu-name="${menuName}"]`)
+
+		function setActiveContent(index) {
+			// Update active state for buttons
+			buttons.forEach((btn) => btn.classList.remove('active', 'bg-gray-100'))
+			buttons[index]?.classList.add('active', 'bg-gray-100')
+
+			// Update content with fade transition
+			contents.forEach((content) => {
+				content.classList.add('hidden')
+				content.style.opacity = '0'
+			})
+
+			const activeContent = contents[index]
+			if (activeContent) {
+				activeContent.classList.remove('hidden')
+				setTimeout(() => {
+					activeContent.style.opacity = '1'
+				}, 50)
+			}
+		}
+
+		// Set initial content
+		setActiveContent(0)
+
+		// Add hover handlers
+		buttons.forEach((button, index) => {
+			button.addEventListener('mouseenter', () => {
+				setActiveContent(index)
+			})
+			// button.addEventListener('click', () => {
+			// 	// setActiveContent(index)
+			// 	const l = menuItems[index].link
+			// 	if (l) {
+			// 		window.open(l, '_self')
+			// 	}
+			// })
+		})
+	})
+</script>
+
+<style>
+	.menu-item.active {
+		@apply bg-gray-100 text-primary-600 dark:bg-neutral-800 dark:text-primary-400;
+	}
+
+	.content-area {
+		@apply relative;
+	}
+
+	.menu-content {
+		@apply relative left-0 top-0 w-full transition-opacity duration-150;
+	}
+</style>

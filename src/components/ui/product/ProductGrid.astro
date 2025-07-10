@@ -1,0 +1,32 @@
+---
+import ProductCard from './ProductCard.astro'
+
+const products = [
+	{
+		title: 'Canary Acuity',
+		description:
+			'A remarkably comprehensive test giving physicians cutting-edge information to inform treatment decisions.',
+		link: '/canary-acuity'
+	},
+	{
+		title: 'Canary Pulse',
+		description:
+			'Enabling early detection of recurrence, this test is an essential resource for patients looking for customized treatment strategies or longitudinal monitoring',
+		link: '/canary-pulse'
+	},
+	{
+		title: 'Canary Focus',
+		description:
+			'An affordable and streamlined panel effectively identifying gene mutations relevant for targeted therapies in commonly occurring cancers',
+		link: '/canary-focus'
+	}
+]
+---
+
+<div class="grid grid-cols-1 justify-items-center gap-8 p-8 md:grid-cols-2 lg:grid-cols-3">
+	{
+		products.map((product) => (
+			<ProductCard title={product.title} description={product.description} link={product.link} />
+		))
+	}
+</div>

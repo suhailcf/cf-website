@@ -1,0 +1,72 @@
+---
+// Basic Cards grid Section
+// ------------
+// Description: A grid of cards with basic contact information in a 4 column layout.
+// Properties:
+// - classes: Additional classes to be added to the Section
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+// - UI
+import Card from '../../ui/cards/BasicCard.astro'
+
+// 	Props
+type Props = {
+	classes?: string
+}
+const { classes } = Astro.props
+---
+
+<Section id="requests" classes={classes}>
+	<Row>
+		<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+			<h2 class="text-balance">Have a Special Request? We’re Here to <strong>Help!</strong></h2>
+			<p class="pb-0 text-lg">
+				Choose from one of the options below to get the specific help you need. Whether it's
+				customer support, sales inquiries, feature requests, or general feedback, we're here to
+				provide you with the best assistance possible.
+			</p>
+		</Col>
+	</Row>
+	<Row>
+		<Col span="3">
+			<Card
+				title="US Office"
+				subtitle="20 E Thomas Road, Suite 2203, Phoenix, Arizona, 85012, USA"
+				icon="location-dot-solid"
+				classes="text-center dark:!bg-neutral-800/50"
+				link=""
+			/>
+		</Col>
+		<Col span="3">
+			<Card
+				title="India Office"
+				subtitle="RMZ, Millenia Business Park, Perungudi, Chennai, Tamil Nadu, India, 600096 "
+				icon="location-dot-solid"
+				classes="text-center dark:!bg-neutral-800/50"
+				link=""
+			/>
+		</Col>
+		<Col span="3">
+			<Card
+				title="Phone Numbers"
+				subtitle="1-888-909-9809"
+				icon="phone-solid"
+				classes="text-center dark:!bg-neutral-800/50"
+				link="/contact"
+			/>
+		</Col>
+		<Col span="3" classes="flex flex-col gap-6">
+			<Card
+				title="Office Email"
+				subtitle="info@canaryonco.com"
+				icon="envelope-solid"
+				classes="text-center dark:!bg-neutral-800/50"
+				link="/contact"
+			/>
+		</Col>
+	</Row>
+</Section>

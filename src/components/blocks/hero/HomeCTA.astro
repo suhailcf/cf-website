@@ -1,0 +1,87 @@
+---
+// Home page CTA Section
+// ------------
+// Description: A centered call to action section that contains: a title, text, a user review snippet, a button and a image.
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+// - UI
+import ChipNotification from '../../ui/ChipNotification.astro'
+import { Image } from 'astro:assets'
+import Button from '../../ui/Button.astro'
+import AvatarGroup from '../../ui/AvatarGroup.astro'
+
+// Content
+// - Hero Image
+import heroImage from '../../../assets/hero-image-3.png'
+// - Avatars
+import user1 from '../../../assets/avatars/avatar-01.webp'
+import user2 from '../../../assets/avatars/avatar-02.webp'
+import user3 from '../../../assets/avatars/avatar-03.webp'
+
+// import forPatient from '../../../../public/images/for-patient1.png'
+const avatars = [
+	{ image: { src: user1.src, alt: 'user name' }, link: '/' },
+	{ image: { src: user2.src, alt: 'user name' }, link: '/' },
+	{ image: { src: user3.src, alt: 'user name' }, link: '/' }
+]
+---
+
+<Section
+	id="intro"
+	classes="dark:bg-neutral-900 bg-gradient-to-b from-white to-primary-50 w-full pt-10 pb-1 "
+>
+	<Row>
+		<!-- <Col span="1" /> -->
+		<Col span="6">
+			<!-- <ChipNotification radius="rounded-full" classes="mb-6">
+				<strong>30K+</strong> satisfied customers
+				<AvatarGroup avatars={avatars} radius="rounded-full" slot="button" />
+			</ChipNotification> -->
+			<h1>
+				Tomorrow's Work.
+				<br />
+				<span
+					class="via-primary bg-gradient-to-r from-primary-600 to-indigo-500 bg-clip-text text-transparent"
+				>
+					Today
+				</span>{' '}
+			</h1>
+
+			<!-- <p class="pb-0 text-lg">Work smarter, not harder, with our innovative platform</p> -->
+			<p class="pb-0 text-lg">
+				Your business, <span
+					class="via-primary bg-gradient-to-r from-primary-600 to-indigo-500 bg-clip-text text-transparent"
+					>future-proofed</span
+				>. Your Google Workspace, <span
+					class="via-primary bg-gradient-to-r from-primary-600 to-indigo-500 bg-clip-text text-transparent"
+					>automated</span
+				>. Streamline workflows, integrate systems, and leverage AI for maximum efficiency.
+			</p>
+			<!-- <Button size="lg" link="/" style="primary" classes="!bg-white !text-black" elevated
+				>Learn More</Button
+			> -->
+			<Button
+				size="lg"
+				link="/"
+				style="primary"
+				elevated
+				classes="!text-white">Learn More</Button
+			>
+			<Button
+				size="lg"
+				link="/"
+				style="primary"
+				variation="outline"
+				elevated
+				classes="!bg-white !text-black">Get a Free consultation</Button
+			>
+		</Col>
+		<Col span="6"> <Image src={heroImage} alt="CloudFort & Google Workspace" format="webp" /></Col>
+
+		<!-- <Col span="1" /> -->
+	</Row>
+</Section>

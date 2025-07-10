@@ -1,0 +1,134 @@
+---
+// Feature Cards grid Section
+// ------------
+// Description: A grid of cards with feature information in a 4 column layout.
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+// - UI
+import Card from '../../ui/cards/FeatureCard.astro'
+
+// Content
+// - Cards
+import acuityImage from '../../../../public/images/acuity-new.jpg'
+// import pulseImage from '../../../../public/images/pulse-new.jpg'
+// import focusImage from '../../../../public/images/focus-new.jpg'
+
+// import acuityImage from '../../../../public/images/test-1.jpg'
+import pulseImage from '../../../../public/images/test-2.png'
+import focusImage from '../../../../public/images/test-3.png'
+// - UI
+import Feature from '../../ui/Feature.astro'
+
+// Data
+import features from '../../../data/json-files/featuresData.json'
+---
+
+<Section id="features">
+	<Row>
+		<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+			<h2 class="text-pretty">
+				Driving <strong>Innovation</strong> and <strong>Success</strong> with Google Cloud with CloudFort
+			</h2>
+			<p class="pb-0 text-lg">
+				Empower your business with innovative Google Cloud solutions and unlock the full potential
+				of Google Workspace. We drive efficiency, security, and cost savings through expert
+				consulting and tailored automation.
+			</p>
+		</Col>
+	</Row>
+	<Row>
+		{
+			features.slice(0, 8).map((feature) => (
+				<Col span="3">
+					<Feature title={feature.title} icon={feature.icon} align="left" classes="mb-12">
+						{feature.description}
+					</Feature>
+				</Col>
+			))
+		}
+	</Row>
+	<Row classes="m-12">
+		<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+			<h2 class="text-pretty">
+				Innovative tools to <strong>transform</strong> your workflow
+			</h2>
+			<p class="pb-0 text-lg">
+				Explore the suite of add-ons designed to <strong>streamline your workflow</strong> in Google
+				Sheets, Docs, Forms, Gmail & Drive, enhance productivity, and drive growth.
+			</p>
+		</Col>
+	</Row>
+	<Row>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="Smart Copilot for Sheets"
+				subtitle="Tired of tedious spreadsheet tasks? Smart Copilot for Sheets uses AI to understand your natural language requests. Just tell it what you need - from data entry to pivot tables - and watch it happen instantly. Unlock the power of AI for effortless spreadsheet automation!"
+				image={pulseImage}
+				link="/coming-soon"
+			/>
+		</Col>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="AI for Workspace"
+				subtitle="Your AI-Powered Workspace Companion - Ask questions, get summaries, and automate tasks with ease with GPT, Gemini, Claude AI directly in your Sheets, Docs & Forms. From data analysis to document creation, AI for Workspace streamlines your workflow and helps you achieve more"
+				image={pulseImage}
+				link="https://aiforworkspace.gwaddons.com"
+			/>
+		</Col>
+
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="AI Assist for Gemini in Sheets, Docs & Forms"
+				subtitle="Your AI-Powered Workspace Companion - Ask questions, get summaries, and automate tasks with ease. From data analysis to document creation, Gemini streamlines your workflow and helps you achieve more"
+				image={pulseImage}
+				link="https://geminiforwork.gwaddons.com"
+			/>
+		</Col>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="Smart Label Maker"
+				subtitle="Simplify shipping and packing with automated label creation. Print perfectly aligned labels in Google Docs and Google Sheets. Select from 1000+ templates compatible with Avery labels and Mail merge. "
+				image={pulseImage}
+				link="https://smartlabelmaker.gwaddons.com"
+			/></Col
+		>
+	</Row>
+	<Row>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="Smart Certificates"
+				subtitle="Automates certificate creation for Google Forms. Easily customize templates, send personalized certificates via email, and track them in Google Drive"
+				image={pulseImage}
+				link="https://smartcertificates.gwaddons.com"
+			/>
+		</Col>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="Smart Contacts"
+				subtitle="Keep your team connected - Simplify contact management: Add, edit, delete Domain Shared Contacts & personal Contacts in Sheets."
+				image={pulseImage}
+				link="https://smartcontacts.gwaddons.com"
+			/>
+		</Col>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="Smart Mail Merge"
+				subtitle="Automate personalized mass emails with dynamic attachments, scheduling, and tracking. Save time, boost efficiency, and increase conversions with AI-powered email templates."
+				image={pulseImage}
+				link="https://smartmailmerge.gwaddons.com"
+			/>
+		</Col>
+		<Col span="3" classes="mb-12 max-w-2xl mx-auto">
+			<Card
+				title="Email Extractor"
+				subtitle="Effortlessly extract email addresses from your Gmail inbox and organize them in a Google Sheet."
+				image={pulseImage}
+				link="https://emailextractor.gwaddons.com"
+			/>
+		</Col>
+	</Row>
+</Section>

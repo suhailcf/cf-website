@@ -1,0 +1,54 @@
+---
+interface Props {
+	thumbnailUrl: string
+	videoUrl: string
+	title?: string
+}
+
+const { thumbnailUrl, videoUrl, title } = Astro.props
+---
+
+<div class="group relative aspect-video w-full cursor-pointer" id="videoContainer">
+	<!-- Thumbnail -->
+	<img src={thumbnailUrl} alt={title || 'Video thumbnail'} class="h-full w-full object-cover" />
+
+	<!-- Play Button Overlay -->
+	<div
+		class="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/40"
+	>
+		<div
+			class="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 transition-colors group-hover:bg-white"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="currentColor"
+				class="h-8 w-8 translate-x-0.5 text-black"
+			>
+				<path
+					d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z"
+				></path>
+			</svg>
+		</div>
+	</div>
+
+	<!-- Video Player (Hidden Initially) -->
+	<video class="absolute inset-0 hidden h-full w-full" id="videoPlayer" controls>
+		<source src={videoUrl} type="video/mp4" />
+		Your browser does not support the video tag.
+	</video>
+</div>
+
+<script>
+	const videoContainer = document.getElementById('videoContainer')
+	const videoPlayer = document.getElementById('videoPlayer') as HTMLVideoElement
+
+	if (videoContainer && videoPlayer) {
+		videoContainer.addEventListener('click', () => {
+			videoPlayer.classList.remove('hidden')
+			videoPlayer.play()
+			videoContainer.querySelector('img')?.classList.add('hidden')
+			videoContainer.querySelector('div')?.classList.add('hidden')
+		})
+	}
+</script>

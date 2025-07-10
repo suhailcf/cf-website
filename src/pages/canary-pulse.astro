@@ -1,0 +1,152 @@
+---
+import Layout from '../layouts/Layout.astro'
+import FeaturesCanaryPulse from '../components/features-canary-pulse'
+import CanaryComparisonTable from '../components/canary-comparison-table'
+import OtherComparisonTable from '../components/other-comparison-table'
+import Button from '../components/ui/Button.astro'
+import FAQ from '../components/blocks/FAQ/FaqSticky.astro'
+
+// Data
+import faqData from '../data/json-files/faqData.json'
+// - FAQ Categories
+const faqAcuity = faqData.filter((faq) => faq.category === 'acuity')
+
+const SEO = {
+	title: 'Canary Pulse | Canary Oncoceutics',
+	description: ''
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<section class="mt-2 w-full">
+		<div
+			class="mx-auto bg-cover bg-fixed bg-right bg-no-repeat lg:bg-[url(/images/Main_img-acuity.jpg)]"
+		>
+			<div
+				class="bg-primary-50 bg-gradient-to-r from-primary-50 from-30% via-white/90 via-60% to-transparent to-90% px-5 py-12 md:px-10 lg:bg-transparent"
+			>
+				<div class="container mx-auto grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+					{/* Left Content */}
+					<div class="space-y-14">
+						<div class="space-y-6">
+							<div>
+								<h1 class="mb-2 text-3xl font-semibold text-gray-900">Canary Pulse™</h1>
+								<h2 class="mb-6 text-xl text-gray-700">LIQUID BIOPSY (ctDNA)</h2>
+							</div>
+
+							<p class="leading-relaxed text-gray-800">
+								DNA which tumors shed into blood is called circulating tumor DNA (ctDNA). As a
+								consequence, peripheral blood can be used as a source of tumor DNA to monitor
+								disease status. Sometimes an analysis of ctDNA provides an oncologist with critical
+								information earlier than is possible with other types of diagnostic tests, e.g., MRI
+								or CT scan. ctDNA findings can help to detect the recurrence of tumor or progression
+								of disease earlier than with other diagnostic tests. Hence, ctDNA results can allow
+								oncologists to monitor a patient’s disease and make treatment decisions sooner than
+								would otherwise be possible. The Canary Pulse™ Liquid Biopsy analyzes an extensive
+								panel of <strong>468</strong> carefully selected cancer-related genes.
+							</p>
+
+							<ul class="flex justify-between gap-4 tracking-tight">
+								<li>
+									<div class="font-semibold">Cancer Types</div>
+									<div class="text-sm text-gray-800">All tumors</div>
+								</li>
+								<li>
+									<div class="font-semibold">Turnaround Time</div>
+									<div class="text-sm text-gray-800">
+										14-21 days from the time the sample is received
+									</div>
+								</li>
+								<li>
+									<div class="font-semibold">Sample Types</div>
+									<div class="text-sm text-gray-800">Peripheral Blood</div>
+								</li>
+							</ul>
+						</div>
+						<div class="mt-12 flex flex-wrap justify-center gap-3 lg:justify-start">
+							<Button size="lg" link="/" style="primary" elevated>Book Now</Button>
+
+							<a href="
+              https://www.youtube.com/watch?v=LjKbfnA84Fo" target="_blank">
+								<Button
+									size="lg"
+									link="https://www.youtube.com/watch?v=LjKbfnA84Fo"
+									target="_blank"
+									style="primary"
+									variation="outline"
+									elevated>Learn more</Button
+								>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section
+		class="sticky top-28 z-20 w-full border-b-4 border-primary-500 bg-white py-4 text-lg lg:top-[8rem] xl:top-[8.5rem] 2xl:top-[9.5rem]"
+	>
+		<div
+			class="scrollbar-hide mx-auto flex w-full max-w-screen-lg items-center justify-evenly space-x-6 overflow-x-auto whitespace-nowrap px-4"
+		>
+			<a href="#" class="flex-none font-medium text-gray-600 hover:text-primary-900">Overview</a>
+			<a href="#test-features" class="flex-none font-medium text-gray-600 hover:text-primary-900"
+				>Test Features</a
+			>
+			<a
+				href="#compare-with-others"
+				class="flex-none font-medium text-gray-600 hover:text-primary-900">Compare with others</a
+			>
+			<a href="#faq" class="flex-none font-medium text-gray-600 hover:text-primary-900">FAQ</a>
+		</div>
+	</section>
+
+	<section id="test-features" class="xs:hidden mx-auto max-w-screen-xl pt-8">
+		<div class="py-10">
+			<FeaturesCanaryPulse client:visible />
+		</div>
+	</section>
+
+	<!-- <section id="compare-with-others" class="max-w-screen-lg mx-auto pt-16 pb-6">
+    <h1 class="flex justify-center mb-10 text-3xl font-bold">
+      Compare with others
+    </h1>
+    <Image
+      src="/images/SS1-2048x1343.png"
+      alt="Compare"
+      width="1024"
+      height="786"
+      class="border rounded-md shadow-md"
+    />
+  </section> -->
+	<section id="compare-with-others" class="mx-auto w-full max-w-7xl pb-6 pt-16">
+		<div class="mb-8 text-center">
+			<h2 class="mb-4 text-3xl font-semibold">Compare with other companies</h2>
+			<p class="text-lg text-gray-600">
+				Comprehensive comparison of Canary diagnostic solutions with other companies' offerings
+			</p>
+		</div>
+		<OtherComparisonTable />
+	</section>
+	<!-- <section id="compare-with-others" class="max-w-screen-2xl mx-auto pt-16 pb-6"> -->
+	<section id="compare-with-canary" class="mx-auto w-full max-w-7xl pb-6 pt-16">
+		<div class="mb-8 text-center">
+			<h2 class="mb-4 text-3xl font-semibold">Compare with Canary Tests</h2>
+			<p class="text-lg text-gray-600">Comprehensive comparison of Canary diagnostic solutions</p>
+		</div>
+		<CanaryComparisonTable />
+	</section>
+
+	<section id="faq" class="mx-auto w-full max-w-screen-xl pb-6 pt-16">
+		<div class="mb-8 text-center">
+			<h2 class="mb-4 text-3xl font-semibold">Canary Pulse™ Frequently Asked Questions</h2>
+		</div>
+
+		<!-- <Faq /> -->
+		<FAQ
+			title="Understanding about Canary Pulse™"
+			text="Get all the details on Canary Pulse™. Learn about the process, results, reports and billing options to find the best test that fits your needs."
+			data={faqAcuity}
+		/>
+	</section>
+</Layout>

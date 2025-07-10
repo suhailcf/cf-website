@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro'
+// import FaqSticky from '../components/blocks/FAQ/FaqSticky.astro'
+// import CTA from '../components/blocks/CTA/BasicLight.astro'
+
+// - SEO
+const SEO = {
+	title: 'A Word from the CEO | Canary Oncoceutics',
+	description: ''
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<div class="mx-auto max-w-2xl py-8">
+		<div class="mb-16 flex w-full justify-center">
+			<div class="w-fit text-center">
+				<h2 class="border-b-2 border-primary-400 pb-2">A Word From The CEO</h2>
+			</div>
+		</div>
+		<div class="mb-8 flex flex-col items-center justify-center space-x-6 md:flex-row">
+			<div class="h-40 w-40 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
+				<img
+					src="../images/team-harry-lander.jpg"
+					alt="CEO Harry"
+					class="h-full w-full object-cover"
+				/>
+			</div>
+
+			<div class="mt-3 flex-1">
+				<blockquote class="">
+					<h3>
+						Discovering hope through precision: Canary Oncoceutics - where quality meets compassion
+						in cancer care.
+					</h3>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+
+	<div class="mx-auto max-w-4xl px-10 pb-16">
+		<article class="prose max-w-none tracking-wider">
+			<p class="mb-2 text-gray-700">
+				At Canary, we utilize cutting-edge technology to decode genomics and support clinical
+				decision-making with unprecedented accuracy. Our dedicated team has pioneered the
+				development of a remarkably comprehensive genomic profiling (CGP) test and smaller focused
+				panels which are meticulously validated for absolute sensitivity and specificity and held to
+				the highest standards, as demonstrated by our Clinical Laboratory Improvement Amendments
+				(CLIA) certification and College of American Pathologists (CAP) accreditation. We also
+				provide extraordinarily useful ctDNA tests.
+			</p>
+
+			<p class="mb-2 text-gray-700">
+				Our CGP test analyzes 1091 genes associated with cancer and also tests for drug
+				sensitivities, providing oncologists and patients with crucial insights into personalized
+				treatment strategies. Beyond the laboratory, our team is committed to providing personalized
+				support throughout the entire diagnostic journey. We offer direct assistance to physicians
+				in interpreting complex genomic reports, ensuring that treatment decisions are based on the
+				latest scientific evidence and tailored to each patient’s unique genetic profile.
+			</p>
+			<p class="mb-2 text-gray-700">
+				At the heart of everything we do is a profound commitment to improving patient outcomes and
+				enhancing quality of life. We understand the significant impact of a cancer diagnosis on
+				individuals and their loved ones. Therefore, alongside our rigorous focus on the accuracy
+				and reliability of our tests, our team extends guidance and support to the families of
+				patients, helping them navigate the complexities of cancer treatment and genetic information
+				with empathy and clarity.
+			</p>
+			<p class="mb-2 text-gray-700">
+				At Canary, we are not just advancing genomic medicine; we are redefining it to empower
+				patients, physicians, and families with the knowledge and support they need to make informed
+				decisions and achieve better outcomes in the fight against cancer.
+			</p>
+			<p class="mb-2 text-gray-700">
+				We are proud of the quality of our tests and are delighted that the oncology community
+				recognizes its power and utility.
+			</p>
+
+			<p class="text-gray-700">
+				Thank you for trusting us with the molecular diagnosis you and your family deserve.
+			</p>
+		</article>
+
+		<div class="mt-7 text-lg font-semibold italic">- Dr. Harry M. Lander</div>
+	</div>
+</Layout>
+
+<style>
+	/* blockquote {
+		border: none;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		margin-bottom: -30px;
+		position: relative;
+	}
+
+	blockquote h3 {
+		font-size: 21px;
+	}
+
+	blockquote h3:before {
+		content: open-quote;
+		font-weight: bold;
+		font-size: 100px;
+		color: #889c0b;
+		position: absolute;
+	}
+	blockquote h3:after {
+		content: close-quote;
+		font-weight: bold;
+		font-size: 100px;
+		color: #889c0b;
+	} */
+
+	blockquote {
+		/* position: relative; */
+		margin-left: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	blockquote h3 {
+		position: relative;
+	}
+
+	blockquote h3::before {
+		content: open-quote;
+		position: absolute;
+		left: -60px;
+		top: 10px;
+		font-size: 100px;
+	}
+	blockquote h3::after {
+		content: close-quote;
+		position: absolute;
+		right: -5px;
+		bottom: -25px;
+		font-size: 100px;
+	}
+</style>

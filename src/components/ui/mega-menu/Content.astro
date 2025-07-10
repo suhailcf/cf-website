@@ -1,0 +1,33 @@
+---
+import Button from '../Button.astro'
+import type { MegaMenuContent } from '../../../config/navigationBar'
+
+type Props = {
+	content: MegaMenuContent
+	link: string
+}
+
+const { content, link } = Astro.props
+---
+
+<div class="h-full px-4">
+	<!-- <h1 class="bg-teal-300 text-4xl">Content for Canary Acuity goes here</h1> -->
+	<div>
+		<h1 class="mb-2 text-3xl font-semibold text-gray-900" set:html={content.heading} />
+		<h2 class="mb-6 text-xl text-gray-700" set:html={content.subHeading} />
+	</div>
+
+	<p class="leading-relaxed text-gray-800" set:html={content.description} />
+
+	{
+		link && (
+			<div>
+				<a href={link} target="_blank">
+					<Button size="lg" link={link} style="neutral" variation='outline' elevated >
+						Learn more
+					</Button>
+				</a>
+			</div>
+		)
+	}
+</div>

@@ -1,0 +1,54 @@
+---
+// ExpandableText.astro
+---
+
+<script>
+	class ExpandableText extends HTMLElement {
+		constructor() {
+			super()
+
+			const button = this.querySelector('button')
+			const expandedText = this.querySelector('.expanded-text')
+
+			if (button && expandedText) {
+				button.addEventListener('click', () => {
+					const isExpanded = expandedText.getAttribute('aria-expanded') === 'true'
+					expandedText.setAttribute('aria-expanded', (!isExpanded).toString())
+					button.textContent = isExpanded ? 'Show more' : 'Show less'
+
+					// Toggle Tailwind classes for animation
+					expandedText.classList.toggle('max-h-0')
+					expandedText.classList.toggle('max-h-[1000px]')
+					expandedText.classList.toggle('mt-4')
+					expandedText.classList.toggle('opacity-0')
+					expandedText.classList.toggle('opacity-100')
+
+					button.classList.add('hidden')
+				})
+			}
+		}
+	}
+
+	customElements.define('expandable-text', ExpandableText)
+</script>
+
+<expandable-text class="flex flex-col items-center">
+	<div class="prose max-w-none">
+		<slot name="initial" />
+	</div>
+
+	<button
+		type="button"
+		aria-expanded="false"
+		class="mt-1 w-fit rounded bg-primary-100 px-3 py-1.5 text-sm text-primary-600 transition-colors duration-200 hover:bg-primary-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+	>
+		Read more
+	</button>
+
+	<div
+		class="expanded-text prose max-h-0 max-w-none overflow-hidden opacity-0 transition-all duration-300 ease-out"
+		aria-expanded="false"
+	>
+		<slot name="expanded" />
+	</div>
+</expandable-text>
